@@ -1,0 +1,53 @@
+s
+<div class="container">
+ 
+  <div class="api-key-form">
+    <h2>Enter API Key</h2>
+    <form [formGroup]="apiKeyForm" (ngSubmit)="fetchTopStories()">
+      <label for="apiKey">API Key:</label>
+      <input type="text" id="apiKey" formControlName="apiKey" required>
+      <button type="submit" [disabled]="!apiKeyForm.valid">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="!isLoading">
+  <div *ngIf="articles && articles.length" class="top-stories-table">
+    <h2>Top Stories</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Section</th>
+          <th>Subsection</th>
+          <th>Title</th>
+          <th>Abstract</th>
+          <th>Byline</th>
+          <th>Published Date</th>
+          <th>Multimedia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of articles">
+          <td>{{ article.id }}</td>
+          <td>{{ article.section }}</td>
+          <td>{{ article.subsection }}</td>
+          <td>{{ article.title }}</td>
+          <td>{{ article.abstract }}</td>
+          <td>{{ article.byline }}</td>
+          <td>{{ article.publishedDate }}</td>
+          <td>
+            <div *ngIf="article.multimedia && article.multimedia.length" class="multimedia-container">
+              <div *ngFor="let media of article.multimedia" class="media-item">
+                <img *ngIf="media.type === 'image'" [src]="media.url" [alt]="media.caption" height="50">
+                <video *ngIf="media.type === 'video'" [src]="media.url" [poster]="media.url" controls height="50"></video>
+               
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
