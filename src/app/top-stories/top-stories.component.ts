@@ -32,11 +32,11 @@ export class TopStoriesComponent implements OnInit {
       .subscribe(
         articles => {
           this.articles = articles;
-          this.isLoading = false; // Set loading state to false once data is fetched
+          this.isLoading = false; 
         },
         error => {
           console.error('Error fetching top stories:', error);
-          this.isLoading = false; // Set loading state to false in case of error
+          this.isLoading = false; 
         }
       );
     }
